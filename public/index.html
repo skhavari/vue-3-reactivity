@@ -63,25 +63,14 @@ const emptyText = '🍩';
 let count = ref(0);
 let text = ref(emptyText);
 
-let onCountUpdated = () => {
-    countEl.textContent = count.value;
-};
-
-let onTextUpdated = () => {
-    textEl.textContent = text.value;
-};
+let onCountUpdated = () => countEl.textContent = count.value;
+let onTextUpdated = () => textEl.textContent = text.value;
 
 watchEffect(onCountUpdated);
 watchEffect(onTextUpdated);
 
 inputEl.addEventListener('keydown', () => count.value++);
-inputEl.addEventListener('keyup', () => {
-    let val = emptyText;
-    if (inputEl.value.length !== 0) {
-        val = inputEl.value;
-    }
-    text.value = val;
-});
+inputEl.addEventListener('keyup', () => text.value = inputEl.value.length ? inputEl.value : emptyText);
                   
                   </code></pre>
             </div>
